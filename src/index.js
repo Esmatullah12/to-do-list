@@ -1,3 +1,5 @@
+import './style.css';
+
 class ToDoList {
   constructor() {
     this.toDoDiv = document.querySelector('.to-do-container');
@@ -15,6 +17,11 @@ class ToDoList {
     });
   }
 
+  removeToDo(removeToDo) {
+    this.toDo = this.toDo.filter((toDo) => toDo !== removeToDo);
+    this.render();
+  }
+
   createToDo(toDo) {
     const toDoApp = document.createElement('div');
     toDoApp.classList.add('to-do-element');
@@ -28,21 +35,12 @@ class ToDoList {
       </div>
       <hr>
     `;
-    this.addListeners(toDoApp);
+    const deleteBtn = toDoApp.querySelector('.remove-btn');
+    deleteBtn.addEventListener('click', () => {
+      this.removeToDo(toDo);
+      toDoApp.remove();
+    });
     return toDoApp;
-  }
-
-  addListeners(toDoApp) {
-    const removeBtn = toDoApp.querySelector('.remove-btn');
-    const checkbox = toDoApp.querySelector('.checkbox');
-
-    removeBtn.addEventListener('click', () => {
-      this.removeToDo(toDoApp);
-    });
-
-    checkbox.addEventListener('change', () => {
-      this.toggleCompleted(toDoApp);
-    });
   }
 }
 
