@@ -86,10 +86,8 @@ class ToDoList {
       this.check(toDoApp);
       if (toDo.completed === true) {
         this.toDo.completed = false;
-        console.log(toDo);
       } else {
         this.toDo.completed = true;
-        console.log(toDo);
       }
     });
 
