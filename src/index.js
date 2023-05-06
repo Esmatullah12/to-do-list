@@ -105,8 +105,10 @@ class ToDoList {
         toDo.description = editInput.value;
         const newToDoElement = this.createToDo(toDo);
         toDoApp.replaceWith(newToDoElement);
+        this.saveToLocalStorage();
       });
     });
+
     return toDoApp;
   }
 }
