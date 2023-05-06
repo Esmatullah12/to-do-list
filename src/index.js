@@ -25,6 +25,9 @@ class ToDoList {
 
   removeToDo(removeToDo) {
     this.toDo = this.toDo.filter((toDo) => toDo !== removeToDo);
+    for(let i=0; i<this.toDo.length; i++){
+      this.toDo[i].index = i
+    }
     this.saveToLocalStorage();
     this.render();
   }
