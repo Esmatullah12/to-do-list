@@ -1,4 +1,5 @@
 import './style.css';
+import {addTodo} from './add-remove-edits';
 
 class ToDoList {
   constructor() {
@@ -6,7 +7,7 @@ class ToDoList {
     this.clearBtn = document.querySelector('.clear-btn');
     this.toDoForm = document.querySelector('.to-do-form');
     this.toDoDiv = document.querySelector('.to-do-container');
-    this.toDoForm.addEventListener('submit', this.addToDo.bind(this));
+    this.toDoForm.addEventListener('submit', addToDo());
     this.clearBtn.addEventListener('click', this.clearCompleted.bind(this));
     this.render();
   }
@@ -63,6 +64,19 @@ class ToDoList {
     this.toDoForm.reset();
   }
 
+  check(toDo) {
+    const description = toDo.querySelector('.todo-description');
+    const todo = this.toDo.find((item) => item.description === description.textContent);
+    if (todo.completed === false) {
+      todo.completed = true;
+      description.classList.remove('strikethrough');
+    } else {
+      todo.completed = false;
+      description.classList.add('strikethrough');
+    }
+    this.saveToLocalStorage();
+  }
+
   createToDo(toDo) {
     const toDoApp = document.createElement('div');
     toDoApp.classList.add('to-do-element');
@@ -113,3 +127,6 @@ class ToDoList {
 
 const toDo = new ToDoList();
 toDo.render();
+
+
+export { ToDoList };
